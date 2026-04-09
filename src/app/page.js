@@ -4,9 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-950 text-white">
-      <Navbar />
-
+    <div>
       <section className="flex flex-col items-center justify-center text-center px-6 py-20">
         <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
           Manage Your Tasks <br />
@@ -74,8 +72,6 @@ export default function Home() {
           Go to Dashboard
         </Link>
       </section>
-
-      <Footer />
     </div>
   );
 }

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({ setOpenTaskDialog }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -26,6 +26,7 @@ export default function Navbar() {
         <Link
           href={"/tasks"}
           className="hidden md:block px-5 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white  font-medium shadow-lg hover:scale-105 transition-all duration-300 "
+          onClick={() => setOpenTaskDialog(true)}
         >
           + Add Task
         </Link>
@@ -49,8 +50,11 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/tasks/create"
-            onClick={() => setIsOpen(false)}
+            href="/tasks"
+            onClick={() => {
+              setIsOpen(false);
+              setOpenTaskDialog(true);
+            }}
             className="mt-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white text-center"
           >
             + Add Task
