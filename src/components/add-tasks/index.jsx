@@ -13,10 +13,28 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useTaskContext } from "@/app/context/TaskContext";
 
-export default function AddNewTask({ openTaskDialog, setOpenTaskDialog }) {
+export default function AddNewTask() {
+  const {
+    openTaskDialog,
+    setOpenTaskDialog,
+    taskFormData,
+    setTaskFormData,
+    resetTaskFormData,
+
+    handleSaveTask,
+  } = useTaskContext();
+  const router = useRouter();
   return (
-    <Dialog open={openTaskDialog} onOpenChange={setOpenTaskDialog}>
+    <Dialog
+      open={openTaskDialog}
+      onOpenChange={(open) => {
+        setOpenTaskDialog(open);
+        if (!open) resetTaskFormData();
+      }}
+    >
       <DialogContent
         className="
       w-[95%] sm:max-w-md md:max-w-lg 
@@ -43,6 +61,10 @@ export default function AddNewTask({ openTaskDialog, setOpenTaskDialog }) {
           <div className="flex flex-col gap-2">
             <Label className="text-gray-300">Title</Label>
             <Input
+              value={taskFormData.title}
+              onChange={(e) =>
+                setTaskFormData({ ...taskFormData, title: e.target.value })
+              }
               placeholder="Enter task title"
               className="bg-gray-900 border-gray-700 focus:border-purple-500 focus:ring-purple-500"
             />
@@ -52,6 +74,13 @@ export default function AddNewTask({ openTaskDialog, setOpenTaskDialog }) {
           <div className="flex flex-col gap-2">
             <Label className="text-gray-300">Description</Label>
             <Input
+              value={taskFormData.description}
+              onChange={(e) =>
+                setTaskFormData({
+                  ...taskFormData,
+                  description: e.target.value,
+                })
+              }
               placeholder="Enter description"
               className="bg-gray-900 border-gray-700 focus:border-blue-500 focus:ring-blue-500"
             />
@@ -62,7 +91,13 @@ export default function AddNewTask({ openTaskDialog, setOpenTaskDialog }) {
             {/* Priority */}
             <div className="flex flex-col gap-2">
               <Label className="text-gray-300">Priority</Label>
-              <select className="px-3 py-2 rounded-md border border-gray-700 bg-gray-900 text-white focus:ring-2 focus:ring-purple-500">
+              <select
+                value={taskFormData.priority}
+                onChange={(e) =>
+                  setTaskFormData({ ...taskFormData, priority: e.target.value })
+                }
+                className="px-3 py-2 rounded-md border border-gray-700 bg-gray-900 text-white focus:ring-2 focus:ring-purple-500"
+              >
                 <option>Low</option>
                 <option>Medium</option>
                 <option>High</option>
@@ -72,7 +107,16 @@ export default function AddNewTask({ openTaskDialog, setOpenTaskDialog }) {
             {/* Status */}
             <div className="flex flex-col gap-2">
               <Label className="text-gray-300">Status</Label>
-              <select className="px-3 py-2 rounded-md border border-gray-700 bg-gray-900 text-white focus:ring-2 focus:ring-blue-500">
+              <select
+                value={taskFormData.status}
+                onChange={(e) =>
+                  setTaskFormData({
+                    ...taskFormData,
+                    status: e.target.value,
+                  })
+                }
+                className="px-3 py-2 rounded-md border border-gray-700 bg-gray-900 text-white focus:ring-2 focus:ring-blue-500"
+              >
                 <option>Pending</option>
                 <option>In Progress</option>
                 <option>Completed</option>
@@ -85,6 +129,7 @@ export default function AddNewTask({ openTaskDialog, setOpenTaskDialog }) {
         <DialogFooter className="flex flex-row gap-3 mt-6">
           <DialogClose asChild>
             <Button
+              onClick={() => router.push("/")}
               variant="outline"
               className="w-auto border-gray-700 hover:bg-gray-800 text-black"
             >
@@ -93,6 +138,7 @@ export default function AddNewTask({ openTaskDialog, setOpenTaskDialog }) {
           </DialogClose>
 
           <Button
+            onClick={handleSaveTask}
             type="button"
             className="
          w-auto 

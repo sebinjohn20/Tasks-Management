@@ -1,11 +1,12 @@
 "use client";
 
+import { useTaskContext } from "@/app/context/TaskContext";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Navbar({ setOpenTaskDialog }) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { setOpenTaskDialog } = useTaskContext();
   return (
     <nav className="w-full bg-gray-900 border-b border-gray-800 px-6 py-4 sticky top-0 z-50">
       <div className="flex items-center justify-between">
@@ -19,14 +20,17 @@ export default function Navbar({ setOpenTaskDialog }) {
           <Link href="/" className="hover:text-white transition">
             Dashboard
           </Link>
-          <Link href="/" className="hover:text-white transition">
+          <Link href="/tasks" className="hover:text-white transition">
             Tasks
           </Link>
         </div>
         <Link
           href={"/tasks"}
           className="hidden md:block px-5 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white  font-medium shadow-lg hover:scale-105 transition-all duration-300 "
-          onClick={() => setOpenTaskDialog(true)}
+          onClick={() => {
+            setIsOpen(false);
+            setOpenTaskDialog(true);
+          }}
         >
           + Add Task
         </Link>
