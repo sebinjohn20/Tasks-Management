@@ -20,7 +20,7 @@ export default function Home() {
 
         <div className="flex gap-4">
           <Link
-            href="/dashboard"
+            href="/tasks"
             className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 font-medium shadow-lg hover:scale-105 transition"
           >
             Get Started
@@ -66,10 +66,10 @@ export default function Home() {
         </h2>
 
         <Link
-          href="/dashboard"
+          href="/"
           className="inline-block mt-4 px-8 py-3 rounded-xl bg-blue-500 hover:bg-blue-600 transition"
         >
-          Go to Dashboard
+          Go to Home
         </Link>
       </section>
     </div>

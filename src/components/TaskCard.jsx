@@ -1,6 +1,9 @@
 "use client";
 
+import { useTaskContext } from "@/app/context/TaskContext";
+
 export default function TaskCard({ task }) {
+  const { handleDeleteTask, handleEditTask } = useTaskContext();
   return (
     <div className="relative group bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-lg border border-gray-700/50 rounded-2xl p-5 shadow-lg shadow-purple-900/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-700/40">
       <div className="flex justify-between items-start mb-3">
@@ -35,11 +38,17 @@ export default function TaskCard({ task }) {
         </span>
 
         <div className="flex gap-2">
-          <button className="px-3 py-1 text-xs rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white transition">
+          <button
+            onClick={() => handleEditTask(task)}
+            className="px-3 py-1 text-xs rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white transition"
+          >
             Edit
           </button>
 
-          <button className="px-3 py-1 text-xs rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition">
+          <button
+            className="px-3 py-1 text-xs rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition"
+            onClick={() => handleDeleteTask(task._id)}
+          >
             Delete
           </button>
         </div>

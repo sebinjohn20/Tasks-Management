@@ -17,9 +17,7 @@ export default function Navbar() {
           <Link href="/" className="hover:text-white transition">
             Home
           </Link>
-          <Link href="/" className="hover:text-white transition">
-            Dashboard
-          </Link>
+
           <Link href="/tasks" className="hover:text-white transition">
             Tasks
           </Link>
@@ -46,9 +44,7 @@ export default function Navbar() {
           <Link href="/" onClick={() => setIsOpen(false)}>
             Home
           </Link>
-          <Link href="/dashboard" onClick={() => setIsOpen(false)}>
-            Dashboard
-          </Link>
+
           <Link href="/tasks" onClick={() => setIsOpen(false)}>
             Tasks
           </Link>

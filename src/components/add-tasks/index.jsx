@@ -24,7 +24,9 @@ export default function AddNewTask() {
     setTaskFormData,
     resetTaskFormData,
 
-    handleSaveTask,
+    handleSubmitTask,
+    currentEditedTaskID,
+    setCurrentEditedTaskID,
   } = useTaskContext();
   const router = useRouter();
   return (
@@ -47,7 +49,7 @@ export default function AddNewTask() {
         {/* Header */}
         <DialogHeader>
           <DialogTitle className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
-            Add New Task 🚀
+            {currentEditedTaskID === null ? "Add New Task" : "Edit Task"}
           </DialogTitle>
 
           <DialogDescription className="text-gray-400 text-sm sm:text-base">
@@ -129,7 +131,9 @@ export default function AddNewTask() {
         <DialogFooter className="flex flex-row gap-3 mt-6">
           <DialogClose asChild>
             <Button
-              onClick={() => router.push("/")}
+              onClick={() => {
+                (router.push("/tasks"), setCurrentEditedTaskID(null));
+              }}
               variant="outline"
               className="w-auto border-gray-700 hover:bg-gray-800 text-black"
             >
@@ -138,7 +142,7 @@ export default function AddNewTask() {
           </DialogClose>
 
           <Button
-            onClick={handleSaveTask}
+            onClick={handleSubmitTask}
             type="button"
             className="
          w-auto 
@@ -147,7 +151,7 @@ export default function AddNewTask() {
           shadow-lg shadow-purple-700/30
         "
           >
-            Save Task
+            {currentEditedTaskID === null ? "Save Task" : "Update Task"}
           </Button>
         </DialogFooter>
       </DialogContent>
