@@ -12,10 +12,13 @@ async function fetchListOfTasks() {
       },
     );
 
+    if (!apiResponse.ok) throw new Error("Failed to fetch");
+
     const result = await apiResponse.json();
     return result?.data;
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
+    return [];
   }
 }
 
