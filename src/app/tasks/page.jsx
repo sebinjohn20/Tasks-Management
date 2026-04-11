@@ -4,13 +4,10 @@ import TaskOverView from "@/components/task-overview";
 
 async function fetchListOfTasks() {
   try {
-    const apiResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/get-tasks`,
-      {
-        method: "GET",
-        cache: "no-store",
-      },
-    );
+    const apiResponse = await fetch(`/api/get-tasks`, {
+      method: "GET",
+      cache: "no-store",
+    });
 
     if (!apiResponse.ok) throw new Error("Failed to fetch");
 
